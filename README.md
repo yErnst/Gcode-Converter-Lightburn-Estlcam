@@ -6,16 +6,15 @@ Dieses Programm ermöglicht, mit Lightburn erstellten G-code in für Estlcam ver
 
 1.Erstellen eines neuen Geräts
 
-![grafik](https://github.com/yErnst/gcode-converter-Lightburn-Estlcam/assets/144956031/382c05a5-3689-4318-965e-833277b1e75e)
+![1](https://github.com/yErnst/Gcode-Converter-Lightburn-Estlcam/assets/144956031/74018829-f556-494d-983b-23293b4dc04c)
 
 2. Benenne das Gerät und gib den verfahrweg der Achsen deiner Maschine an.
    
-![grafik](https://github.com/yErnst/gcode-converter-Lightburn-Estlcam/assets/144956031/3ebefc18-3d39-49d8-b927-a778a1f7d932)
+![2](https://github.com/yErnst/Gcode-Converter-Lightburn-Estlcam/assets/144956031/1977afff-3765-4f34-918f-fc5a90c894b0)
 
 4. Setze den Nullpunkt auf "Hinten Links".
    
-![grafik](https://github.com/yErnst/gcode-converter-Lightburn-Estlcam/assets/144956031/33eed461-7163-44a8-8cc6-3d419f648483)
-
+![3](https://github.com/yErnst/Gcode-Converter-Lightburn-Estlcam/assets/144956031/2f414420-ba8a-4558-8ea4-9fc36ec23be3)
 
 # Verwendung und Vorraussetzungen des Converters
 
@@ -23,30 +22,29 @@ Zum ausführen des Gcode-Converter muss Java installiert sein. (getestet mit Jav
 
 Starte den Gcode-Converter mit einem Doppelklick und wählen den mit Lightburn erstellen Gcode aus.
 
-![grafik](https://github.com/yErnst/gcode-converter-Lightburn-Estlcam/assets/144956031/73be58b2-1f17-49d8-803b-4f00ebd44e19)
+![4](https://github.com/yErnst/Gcode-Converter-Lightburn-Estlcam/assets/144956031/cd1ab7a0-adb7-4941-8ca2-cc25d26b1184)
 
 Nach klicken auf Öffnen wird eine 2. Datei mit der zusätzlichen Dateiendung .g90.nc im selben Verzeichniss erstellt. Diese Datei kann nun in Estlcam verwendet werden.
 
-![grafik](https://github.com/yErnst/gcode-converter-Lightburn-Estlcam/assets/144956031/cd5f586b-344e-4868-ba2e-c3dc905f425a)
+![5](https://github.com/yErnst/Gcode-Converter-Lightburn-Estlcam/assets/144956031/c105ec8c-ce0a-4eeb-a9f4-b29db1ea3ab5)
 
 # Setzen des Projektordners beim starten des Programms
 Erstelle eine Verknüpfung und hänge den Pfard zum startordner wie folgt an. (Der Pfard muss zwischen " geschrieben werden)
 
-![grafik](https://github.com/yErnst/gcode-converter-Lightburn-Estlcam/assets/144956031/d05e7f55-b755-4c30-86a1-bd164569d180)
+![6](https://github.com/yErnst/Gcode-Converter-Lightburn-Estlcam/assets/144956031/75cc57ab-fc01-4adf-91b8-1fec4ab56de0)
 
 # Beispielprojekt
 Lightburn
 
-![grafik](https://github.com/yErnst/gcode-converter-Lightburn-Estlcam/assets/144956031/7d5997b7-45fc-4934-9ff1-dc776ca443ea)
+![7](https://github.com/yErnst/Gcode-Converter-Lightburn-Estlcam/assets/144956031/cfd3659e-11ff-48a2-84e5-d0f783b5d1cc)
 
 Vor verwendung des Converters
 
-![grafik](https://github.com/yErnst/gcode-converter-Lightburn-Estlcam/assets/144956031/d59ee035-fc70-4a6a-b27a-9a07c5d045ca)
-
+![8](https://github.com/yErnst/Gcode-Converter-Lightburn-Estlcam/assets/144956031/36ae508f-7209-4f1b-9bb7-e86844b70245)
 
 Nach verwendung des Converters
 
-![grafik](https://github.com/yErnst/gcode-converter-Lightburn-Estlcam/assets/144956031/b61bd66c-ce19-43f3-91c4-0e889c53beb8)
+![9](https://github.com/yErnst/Gcode-Converter-Lightburn-Estlcam/assets/144956031/d2ab0c8c-1605-4bc7-9b8d-e059a4d134fd)
 
 Es ist empfehlenswert in Lightburn die Fill Funktion mit overscanning zu verwenden.
 

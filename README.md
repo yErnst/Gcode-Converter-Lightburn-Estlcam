@@ -47,3 +47,7 @@ Vor verwendung des Converters
 Nach verwendung des Converters
 
 ![grafik](https://github.com/yErnst/gcode-converter-Lightburn-Estlcam/assets/144956031/b61bd66c-ce19-43f3-91c4-0e889c53beb8)
+
+# Weiteres
+
+Die Anwendung kann Fehler enthalten. Verwendung auf eigene Gefahr.

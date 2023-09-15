@@ -53,4 +53,5 @@ Es ist empfehlenswert in Lightburn die Fill Funktion mit overscanning zu verwend
 # Weiteres
 
 Die Anwendung kann Fehler enthalten. Verwendung auf eigene Gefahr.
-Es wurde gcode ohne Z verfahrwege getestet.
+G02 und G03 befehle sind nicht unterstützt. (Sollte nach den wenigen bisherigen Tests auch nicht notwendig sein)
+Es wurde gcode nur ohne Z verfahrwege getestet.

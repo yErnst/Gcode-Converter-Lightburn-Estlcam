@@ -34,7 +34,7 @@ Erstelle eine Verknüpfung und hänge den Pfard zum startordner wie folgt an. (D
 
 ![grafik](https://github.com/yErnst/gcode-converter-Lightburn-Estlcam/assets/144956031/d05e7f55-b755-4c30-86a1-bd164569d180)
 
-# Testprojekt
+# Beispielprojekt
 Lightburn
 
 ![grafik](https://github.com/yErnst/gcode-converter-Lightburn-Estlcam/assets/144956031/7d5997b7-45fc-4934-9ff1-dc776ca443ea)
@@ -48,6 +48,9 @@ Nach verwendung des Converters
 
 ![grafik](https://github.com/yErnst/gcode-converter-Lightburn-Estlcam/assets/144956031/b61bd66c-ce19-43f3-91c4-0e889c53beb8)
 
+Es ist empfehlenswert in Lightburn die Fill Funktion mit overscanning zu verwenden.
+
 # Weiteres
 
 Die Anwendung kann Fehler enthalten. Verwendung auf eigene Gefahr.
+Es wurde gcode ohne Z verfahrwege getestet.

@@ -4,6 +4,10 @@ Dieses Programm ermöglicht mit Lightburn erstellten G-code, in für Estlcam ver
 
 Es ist kein wechsel zwischen Estlcam Firmware und GRBL auf dem Arduino notwendig.
 
+# Änderungen in Version 2
+-Fix: NC Program funktioniert unter Estlcam V12 nicht.
+-Fix: E-Notation im NC Program behoben.
+
 # Einstellungen Lightburn:
 
 1.Erstellen eines neuen Geräts

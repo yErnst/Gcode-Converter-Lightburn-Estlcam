@@ -1,6 +1,8 @@
 # gcode-converter-Lightburn-Estlcam
 
-Dieses Programm ermöglicht, mit Lightburn erstellten G-code in für Estlcam verständlichen G-code zu konvertieren.
+Dieses Programm ermöglicht mit Lightburn erstellten G-code, in für Estlcam verständlichen G-code zu konvertieren.
+
+Es ist kein wechsel zwischen Estlcam Firmware und GRBL auf dem Arduino notwendig.
 
 # Einstellungen Lightburn:
 

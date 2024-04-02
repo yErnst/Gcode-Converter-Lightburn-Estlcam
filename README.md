@@ -6,6 +6,7 @@ Es ist kein wechsel zwischen Estlcam Firmware und GRBL auf dem Arduino notwendig
 
 # Änderungen in Version 3
 GUI mit vorschau.
+![1 1](https://github.com/yErnst/Gcode-Converter-Lightburn-Estlcam/assets/144956031/0f02f19f-9ba0-401a-b45b-2069a051c1c8)
 
 # Änderungen in Version 2
 -Fix: NC Program funktioniert unter Estlcam V12 nicht.

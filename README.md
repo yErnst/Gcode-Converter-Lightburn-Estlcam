@@ -4,6 +4,10 @@ Dieses Programm ermöglicht mit Lightburn erstellten G-code, in für Estlcam ver
 
 Es ist kein wechsel zwischen Estlcam Firmware und GRBL auf dem Arduino notwendig.
 
+# Änderungen in Version 3
+GUI mit vorschau.
+![1 1](https://github.com/yErnst/Gcode-Converter-Lightburn-Estlcam/assets/144956031/0f02f19f-9ba0-401a-b45b-2069a051c1c8)
+
 # Änderungen in Version 2
 -Fix: NC Program funktioniert unter Estlcam V12 nicht.
 
@@ -23,7 +27,7 @@ Es ist kein wechsel zwischen Estlcam Firmware und GRBL auf dem Arduino notwendig
    
 ![3](https://github.com/yErnst/Gcode-Converter-Lightburn-Estlcam/assets/144956031/2f414420-ba8a-4558-8ea4-9fc36ec23be3)
 
-# Verwendung und Vorraussetzungen des Converters
+# Verwendung und Vorraussetzungen des Converters (V1 und V2)
 
 Zum ausführen des Gcode-Converter muss Java installiert sein. (getestet mit Java 8 und 17)
 
@@ -35,10 +39,12 @@ Nach klicken auf Öffnen wird eine 2. Datei mit der zusätzlichen Dateiendung .g
 
 ![5](https://github.com/yErnst/Gcode-Converter-Lightburn-Estlcam/assets/144956031/c105ec8c-ce0a-4eeb-a9f4-b29db1ea3ab5)
 
-# Setzen des Projektordners beim starten des Programms
+# Setzen des Projektordners beim starten des Programms (V1 und V2)
 Erstelle eine Verknüpfung und hänge den Pfard zum startordner wie folgt an. (Der Pfard muss zwischen " geschrieben werden)
 
 ![6](https://github.com/yErnst/Gcode-Converter-Lightburn-Estlcam/assets/144956031/75cc57ab-fc01-4adf-91b8-1fec4ab56de0)
+Bei V3 wie bei V1 und V2 nur mit -p= vor dem Pfard
+Weitere Komandozeilenparameter finden Sie im Program unter Hilfe->CMD Help
 
 # Beispielprojekt
 Lightburn

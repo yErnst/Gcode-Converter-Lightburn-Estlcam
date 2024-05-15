@@ -142,7 +142,7 @@ public class Canvas extends JPanel {
 		for (Line line : p.getLinesList()) {
 			if (i >= p.visibleLineCount)break;
 			if(!p.converted)break;
-			g2.setColor(line.getLineColor());
+			g2.setColor(line.getLineColor(p.maxS));
 			g2.setStroke(new BasicStroke((float) (line.stroke+scale/1000)));
 			if(line.highlited) {
 				drawLater.add(line);
@@ -153,7 +153,7 @@ public class Canvas extends JPanel {
 			i++;
 		}
 		for(Line line : drawLater) {
-			g2.setColor(line.getLineColor());
+			g2.setColor(line.getLineColor(p.maxS));
 			g2.setStroke(new BasicStroke((float) (line.stroke+1+scale/1000)));
 			g2.draw(new Line2D.Double(WorkspaceToScreen(line.x1, line.y1), WorkspaceToScreen(line.x2, line.y2)));
 		}

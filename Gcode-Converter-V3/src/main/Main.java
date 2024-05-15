@@ -16,7 +16,7 @@ import project.Project;
 
 public class Main {
 
-	public static String version = "V3";
+	public static String version = "V3.1";
 	public final static String cmdhelp = "Start Argumente:\nAlle angaben hinter = müssen in \" erfolgen.\n-nogui Verwende die alte Ansicht. Notwendig in verbindung mit -in und -out.\n-p=    Gibt den Projektordner an.\n-in=   Gibt eine Datei zum konvertieren an. Es kommt kein Auswahlfenster.\n-out= Gibt einen abweichende Datei/Pfard zum speichern an. Falls nicht definiert wird die konvertierte Datei wie gewohnt mit der .g90.nc endung gespeichert.";
 	public static NumberFormat nf = NumberFormat.getInstance(Locale.US);
 	public static DecimalFormat df = (DecimalFormat) nf;

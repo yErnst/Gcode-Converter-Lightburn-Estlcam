@@ -23,6 +23,7 @@ public class Project {
 	public Double minY = 0d;
 	public Double maxX = 0d;
 	public Double maxY = 0d;
+	public Double maxS = 0d;
 	public Double totalLineLength = 0d;
 	public Double estimatedFeedTime = 0d;
 	private Converter projectConverter;

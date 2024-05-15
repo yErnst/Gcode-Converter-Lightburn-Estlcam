@@ -7,6 +7,9 @@ Es ist kein wechsel zwischen Estlcam Firmware und GRBL auf dem Arduino notwendig
 # Änderungen in Version 3
 GUI mit vorschau.
 Max S-Wert in Lightburn muss auf 100 gestellt sein. Werte größer 100 führen zu fehlern bei der Konvertierung.
+
+Ab Version 3.1 werden Max S-Werte größer 100 in Lightburn unterstützt
+
 ![1 1](https://github.com/yErnst/Gcode-Converter-Lightburn-Estlcam/assets/144956031/0f02f19f-9ba0-401a-b45b-2069a051c1c8)
 
 # Änderungen in Version 2

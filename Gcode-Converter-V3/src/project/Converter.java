@@ -1,6 +1,5 @@
 package project;
 
-import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
@@ -27,6 +26,7 @@ public class Converter {
 	private Double minY = 0d;
 	private Double maxX = 0d;
 	private Double maxY = 0d;
+	private Double maxS = 0d;
 	private Double estimatedFeedTime = 0d;
 	private Double totalLineLength = 0d;
 	private ArrayList<Line> lines = new ArrayList<Line>();
@@ -63,6 +63,7 @@ public class Converter {
 		minY = 0d;
 		maxX = 0d;
 		maxY = 0d;
+		maxS = 0d;
 		gcodelines.clear();
 		if (!p.projectFile.exists())
 			return;
@@ -86,6 +87,7 @@ public class Converter {
 			p.minY = minY;
 			p.maxX = maxX;
 			p.maxY = maxY;
+			p.maxS = maxS;
 			p.totalLineLength = totalLineLength;
 			p.estimatedFeedTime = estimatedFeedTime * 1.02; // +2% wegen Beschleunigungsrampen in Estlcam. Ob dieser Wert stimmt ist nicht
 															// getestet.
@@ -138,6 +140,8 @@ public class Converter {
 			minX = currentxpos;
 		if (currentypos < minY)
 			minY = currentypos;
+		if(currentsspeed > maxS)
+			maxS = currentsspeed;
 	}
 
 	private void processSplitLine(String[] splitgcodeline) throws Exception {
@@ -231,9 +235,9 @@ public class Converter {
 		double length = getLength(lastxpos, lastypos, currentxpos, currentypos);
 		totalLineLength += length;
 		if (isG0) {
-			lines.add(new Line(lastxpos, lastypos, currentxpos, currentypos, Color.BLUE, 2, length));
+			lines.add(new Line(lastxpos, lastypos, currentxpos, currentypos, currentsspeed, 2, length, true));
 		} else {
-			lines.add(new Line(lastxpos, lastypos, currentxpos, currentypos, new Color(currentsspeed.intValue() * 255 / 100, 0, 0), 2, length));
+			lines.add(new Line(lastxpos, lastypos, currentxpos, currentypos, currentsspeed, 2, length, false));
 			if (currentfspeed != 0)
 				estimatedFeedTime += length / currentfspeed;
 		}

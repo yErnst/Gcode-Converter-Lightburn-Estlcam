@@ -9,33 +9,32 @@ public class Line{
 	public final double x2;
 	public final double y2;
 	public final double length;
-	private Color color;
 	public float stroke;
 	public boolean highlited = false;
+	public final boolean GzeroRapid;
+	public final Double svalue;
 	
-	public Line(double x1, double y1, double x2, double y2, Color color, float stroke , double length) {
+	public Line(double x1, double y1, double x2, double y2, double svalue, float stroke , double length, boolean GzeroRapid) {
 		this.x1 = x1;
 		this.y1 = y1;
 		this.x2 = x2;
 		this.y2 = y2;
-		this.color = color;
+		this.svalue = svalue;
+		this.GzeroRapid = GzeroRapid;
 		this.stroke = stroke;
 		this.length = length;
-	}
-	
-	public void setLineColor(Color color) {
-		this.color = color;
 	}
 	
 	public void setLineStroke(float stroke) {
 		this.stroke = stroke;
 	}
 	
-	public Color getLineColor() {
+	public Color getLineColor(Double maxS) {
 		if(!highlited) {
-			return color;
+			if(GzeroRapid)return Color.BLUE;
+			return new Color(svalue.intValue() * 255 / maxS.intValue(), 0, 0);
 		}else {
-			if(color.getRed() > 0) {
+			if(svalue > 0) {
 				return Color.orange;
 			}else {
 				return Color.cyan;

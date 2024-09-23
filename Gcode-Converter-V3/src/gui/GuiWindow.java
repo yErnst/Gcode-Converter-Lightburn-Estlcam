@@ -168,7 +168,7 @@ public class GuiWindow extends JFrame{
 		usegrid.setSelected(true);
 		SettingsMenu.add(usegrid);
 		// Help Menu
-		HelpMenu = new JMenu("Hifle");
+		HelpMenu = new JMenu("Hilfe");
 		menuBar.add(HelpMenu);
 		AboutMenuItem = new JMenuItem("Über");
 		HelpMenu.add(AboutMenuItem);
@@ -343,6 +343,7 @@ public class GuiWindow extends JFrame{
 					if (!f.getName().endsWith(".g90.nc"))
 						f = new File(f.getAbsoluteFile() + ".g90.nc");
 					p.save(f);
+					JOptionPane.showMessageDialog(null, "Gespeichert unter " + f.getAbsolutePath());
 				}
 			}
 		});
@@ -352,6 +353,7 @@ public class GuiWindow extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				p.save(p.getSaveFile());
+				JOptionPane.showMessageDialog(null, "Gespeichert unter " + p.getSaveFile().getAbsolutePath());
 			}
 		});
 

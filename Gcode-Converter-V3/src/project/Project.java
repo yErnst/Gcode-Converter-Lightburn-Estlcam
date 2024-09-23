@@ -23,7 +23,7 @@ public class Project {
 	public Double minY = 0d;
 	public Double maxX = 0d;
 	public Double maxY = 0d;
-	public Double maxS = 0d;
+	public int maxS = 0;
 	public Double totalLineLength = 0d;
 	public Double estimatedFeedTime = 0d;
 	private Converter projectConverter;
@@ -75,6 +75,7 @@ public class Project {
 
 	public void openWithEstlcam() {
 		save(getSaveFile());
+		JOptionPane.showMessageDialog(null, "Gespeichert unter " + getSaveFile().getAbsolutePath());
 		try {
 			if (converted)
 				Desktop.getDesktop().open(getSaveFile());
@@ -92,7 +93,7 @@ public class Project {
 					fw.write(line + "\n");
 				}
 				fw.close();
-				JOptionPane.showMessageDialog(null, "Gespeichert unter " + f.getAbsolutePath());
+				//JOptionPane.showMessageDialog(null, "Gespeichert unter " + f.getAbsolutePath());
 				return true;
 			} catch (IOException e) {
 				JOptionPane.showMessageDialog(null, e.getMessage());

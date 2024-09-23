@@ -26,7 +26,7 @@ public class Converter {
 	private Double minY = 0d;
 	private Double maxX = 0d;
 	private Double maxY = 0d;
-	private Double maxS = 0d;
+	private Integer maxS = 0;
 	private Double estimatedFeedTime = 0d;
 	private Double totalLineLength = 0d;
 	private ArrayList<Line> lines = new ArrayList<Line>();
@@ -63,7 +63,7 @@ public class Converter {
 		minY = 0d;
 		maxX = 0d;
 		maxY = 0d;
-		maxS = 0d;
+		maxS = 0;
 		gcodelines.clear();
 		if (!p.projectFile.exists())
 			return;
@@ -141,7 +141,7 @@ public class Converter {
 		if (currentypos < minY)
 			minY = currentypos;
 		if(currentsspeed > maxS)
-			maxS = currentsspeed;
+			maxS = currentsspeed.intValue();
 	}
 
 	private void processSplitLine(String[] splitgcodeline) throws Exception {

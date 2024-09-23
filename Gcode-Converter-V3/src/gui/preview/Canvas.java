@@ -106,10 +106,10 @@ public class Canvas extends JPanel {
 
 	public void focusObject() {
 
-		if ((getWidth() / (p.maxX + 20)) < (getHeight() / (p.maxY + 20))) {
-			scale = (getWidth() / (p.maxX + 20));
+		if ((getWidth() / (p.maxX - p.minX + 20)) < (getHeight() / (p.maxY - p.minY + 20))) {
+			scale = (getWidth() / (p.maxX - p.minX + 20));
 		} else {
-			scale = (getHeight() / (p.maxY + 20));
+			scale = (getHeight() / (p.maxY - p.minY + 20));
 		}
 
 		offsetx = p.minX - 10;

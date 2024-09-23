@@ -16,7 +16,7 @@ import project.Project;
 
 public class Main {
 
-	public static String version = "V3.1";
+	public static String version = "V3.2";
 	public final static String cmdhelp = "Start Argumente:\nAlle angaben hinter = müssen in \" erfolgen.\n-nogui Verwende die alte Ansicht. Notwendig in verbindung mit -in und -out.\n-p=    Gibt den Projektordner an.\n-in=   Gibt eine Datei zum konvertieren an. Es kommt kein Auswahlfenster.\n-out= Gibt einen abweichende Datei/Pfard zum speichern an. Falls nicht definiert wird die konvertierte Datei wie gewohnt mit der .g90.nc endung gespeichert.";
 	public static NumberFormat nf = NumberFormat.getInstance(Locale.US);
 	public static DecimalFormat df = (DecimalFormat) nf;
@@ -134,8 +134,11 @@ public class Main {
 				} else {
 					p.save(p.getSaveFile());
 				}
-				String feedback = "Projekt: " + p.getProjectFile().getName() + " konvertiert in " + df.format(p.getConversionTime()) + "s\nVorschubweg ges. "+df.format(p.totalLineLength)+"mm\nVorschubzeit ca.: "+df.format(p.estimatedFeedTime)+"min\nLinien: " + p.getLinesList().size() + "\nGröße: " + df.format(p.maxX - p.minX) + "mm, " + df.format(p.maxY - p.minY) + "mm\n";
-				JOptionPane.showMessageDialog(null, feedback);
+				if(infilepath.length()==0) {
+					String feedback = "Projekt: " + p.getProjectFile().getName() + " konvertiert in " + df.format(p.getConversionTime()) + "s\nVorschubweg ges. "+df.format(p.totalLineLength)+"mm\nVorschubzeit ca.: "+df.format(p.estimatedFeedTime)+"min\nLinien: " + p.getLinesList().size() + "\nGröße: " + df.format(p.maxX - p.minX) + "mm, " + df.format(p.maxY - p.minY) + "mm\n";
+					JOptionPane.showMessageDialog(null, feedback);
+				}
+				
 			}
 		}
 	}

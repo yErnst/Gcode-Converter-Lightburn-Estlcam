@@ -59,8 +59,8 @@ Nach verwendung des Converters
 
 ![9](https://github.com/yErnst/Gcode-Converter-Lightburn-Estlcam/assets/144956031/d2ab0c8c-1605-4bc7-9b8d-e059a4d134fd)
 
-Es ist empfehlenswert in Lightburn die Fill Funktion mit overscanning zu verwenden.
-Nach meinen erfahrungswerten ist eine versatzkorrektur von 0.08 in Lightburn einzustellen. (kann abweichen)
+Es ist empfehlenswert in Lightburn die Fill Funktion mit overscanning zu verwenden. (ca. 3-6mm)
+Nach meinen erfahrungen ist eine versatzkorrektur von 0.08mm bei 3000mm/min in Lightburn einzustellen.
 
 ![grafik](https://github.com/user-attachments/assets/890e72f8-25e0-4285-980b-036d573e1abd)
 

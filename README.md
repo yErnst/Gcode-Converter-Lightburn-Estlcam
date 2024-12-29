@@ -4,18 +4,10 @@ Dieses Programm ermöglicht mit Lightburn erstellten G-code, in für Estlcam ver
 
 Es ist kein wechsel zwischen Estlcam Firmware und GRBL auf dem Arduino notwendig.
 
-# Änderungen in Version 3
-GUI mit vorschau.
-Max S-Wert in Lightburn muss auf 100 gestellt sein. Werte größer 100 führen zu fehlern bei der Konvertierung.
-
-Ab Version 3.1 werden Max S-Werte größer 100 in Lightburn unterstützt
+# Änderungen in Version 3.2
+Neue Messfunktionen hinzugefügt.
 
 ![1 1](https://github.com/yErnst/Gcode-Converter-Lightburn-Estlcam/assets/144956031/0f02f19f-9ba0-401a-b45b-2069a051c1c8)
-
-# Änderungen in Version 2
--Fix: NC Program funktioniert unter Estlcam V12 nicht.
-
--Fix: E-Notation im NC Program behoben.
 
 # Einstellungen Lightburn:
 
@@ -23,7 +15,7 @@ Ab Version 3.1 werden Max S-Werte größer 100 in Lightburn unterstützt
 
 ![1](https://github.com/yErnst/Gcode-Converter-Lightburn-Estlcam/assets/144956031/74018829-f556-494d-983b-23293b4dc04c)
 
-2. Benenne das Gerät und gib den verfahrweg der Achsen deiner Maschine an.
+2. Benenne das Gerät und gib den Verfahrweg der Achsen deiner Maschine an.
    
 ![2](https://github.com/yErnst/Gcode-Converter-Lightburn-Estlcam/assets/144956031/1977afff-3765-4f34-918f-fc5a90c894b0)
 
@@ -31,23 +23,27 @@ Ab Version 3.1 werden Max S-Werte größer 100 in Lightburn unterstützt
    
 ![3](https://github.com/yErnst/Gcode-Converter-Lightburn-Estlcam/assets/144956031/2f414420-ba8a-4558-8ea4-9fc36ec23be3)
 
-# Verwendung und Vorraussetzungen des Converters (V1 und V2)
+# Verwendung und Vorraussetzungen
 
-Zum ausführen des Gcode-Converter muss Java installiert sein. (getestet mit Java 8 und 17)
+Zum ausführen des Gcode-Converter muss Java installiert sein. (getestet mit Java 8, 17 und 23)
 
-Starte den Gcode-Converter mit einem Doppelklick und wählen den mit Lightburn erstellen Gcode aus.
+Für den vollen Funktionsunfang muss Windows und midestens Java 17 verwendet werden.
 
-![4](https://github.com/yErnst/Gcode-Converter-Lightburn-Estlcam/assets/144956031/cd1ab7a0-adb7-4941-8ca2-cc25d26b1184)
+Starte den Gcode-Converter mit einem Doppelklick und öffne im Linken rand (Projektexplorer) den mit Lightburn erstellen Gcode.
 
-Nach klicken auf Öffnen wird eine 2. Datei mit der zusätzlichen Dateiendung .g90.nc im selben Verzeichniss erstellt. Diese Datei kann nun in Estlcam verwendet werden.
+Der Standard Projektordner, ist der Ordner, in dem die .jar liegt. (Zum Ändern siehe weiter unten)
 
-![5](https://github.com/yErnst/Gcode-Converter-Lightburn-Estlcam/assets/144956031/c105ec8c-ce0a-4eeb-a9f4-b29db1ea3ab5)
+Alternativ kann man den gcode von Lightburn auch über Datei->Öffnen aufmachen.
 
-# Setzen des Projektordners beim starten des Programms (V1 und V2)
-Erstelle eine Verknüpfung und hänge den Pfard zum startordner wie folgt an. (Der Pfard muss zwischen " geschrieben werden)
+![grafik](https://github.com/user-attachments/assets/ebd00533-a89c-496f-9599-45f0e86dccec)
 
-![6](https://github.com/yErnst/Gcode-Converter-Lightburn-Estlcam/assets/144956031/75cc57ab-fc01-4adf-91b8-1fec4ab56de0)
-Bei V3 wie bei V1 und V2 nur mit -p= vor dem Pfard
+Öffne den Gcode durch einen klick auf "Öffnen in Estlcam". (Estkcam muss als Standart für die .nc endung gesetzt sein)
+
+# Setzen des Projektordners beim starten des Programms
+Erstelle eine Verknüpfung und hänge den Pfard zum Projektordner wie folgt an. (Der Pfard muss zwischen " geschrieben werden)
+
+![grafik](https://github.com/user-attachments/assets/ae7552dd-8637-4126-8484-789f39b8eab2)
+
 Weitere Komandozeilenparameter finden Sie im Program unter Hilfe->CMD Help
 
 # Beispielprojekt
@@ -64,9 +60,12 @@ Nach verwendung des Converters
 ![9](https://github.com/yErnst/Gcode-Converter-Lightburn-Estlcam/assets/144956031/d2ab0c8c-1605-4bc7-9b8d-e059a4d134fd)
 
 Es ist empfehlenswert in Lightburn die Fill Funktion mit overscanning zu verwenden.
+Nach meinen erfahrungswerten ist eine versatzkorrektur von 0.08 in Lightburn einzustellen. (kann abweichen)
+
+![grafik](https://github.com/user-attachments/assets/890e72f8-25e0-4285-980b-036d573e1abd)
 
 # Weiteres
 
 Die Anwendung kann Fehler enthalten. Verwendung auf eigene Gefahr.
-G02 und G03 befehle sind nicht unterstützt. (Sollte nach den wenigen bisherigen Tests auch nicht notwendig sein)
-Es wurde gcode nur ohne Z verfahrwege getestet.
+G02 und G03 befehle sind nicht unterstützt. (Sollte nach den bisherigen Tests auch nicht notwendig sein)
+Z Achsen verfahrwege sind nicht möglich, da durch den "Lasergravur" befehl am anfang des Gcodes, Estlcam alle Z bewegungen ignoriert.

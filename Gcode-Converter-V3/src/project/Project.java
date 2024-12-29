@@ -1,6 +1,7 @@
 package project;
 
 import java.awt.Desktop;
+import java.awt.geom.Point2D;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -37,8 +38,8 @@ public class Project {
 	public File getProjectFile() {
 		return projectFile;
 	}
-	
-	public Integer getLastLineFromGcodeLine(Integer linenum){
+
+	public Integer getLastLineFromGcodeLine(Integer linenum) {
 		return codeLineToLine.get(linenum);
 	}
 
@@ -47,7 +48,7 @@ public class Project {
 			return lines;
 		return new ArrayList<Line>();
 	}
-	
+
 	public ArrayList<String> getGcode() {
 		if (converted)
 			return gcode;
@@ -61,7 +62,7 @@ public class Project {
 	public void convert() {
 		projectConverter.convert();
 		visibleLineCount = lines.size();
-		System.out.println("Projekt: " + getProjectFile().getName() + " konvertiert in " + Main.df.format(getConversionTime()) + "s\nVorschubweg ges. "+Main.df.format(totalLineLength)+"mm\nVorschubzeit ca.: "+Main.df.format(estimatedFeedTime)+"min\nLinien: " + getLinesList().size() + "\nGröße: " + Main.df.format(maxX - minX) + "mm, " + Main.df.format(maxY - minY) + "mm\n");
+		System.out.println("Projekt: " + getProjectFile().getName() + " konvertiert in " + Main.df.format(getConversionTime()) + "s\nVorschubweg ges. " + Main.df.format(totalLineLength) + "mm\nVorschubzeit ca.: " + Main.df.format(estimatedFeedTime) + "min\nLinien: " + getLinesList().size() + "\nGröße: " + Main.df.format(maxX - minX) + "mm, " + Main.df.format(maxY - minY) + "mm\n");
 		Runtime.getRuntime().gc();
 	}
 
@@ -75,7 +76,7 @@ public class Project {
 
 	public void openWithEstlcam() {
 		save(getSaveFile());
-		JOptionPane.showMessageDialog(null, "Gespeichert unter " + getSaveFile().getAbsolutePath());
+		//JOptionPane.showMessageDialog(null, "Gespeichert unter " + getSaveFile().getAbsolutePath());
 		try {
 			if (converted)
 				Desktop.getDesktop().open(getSaveFile());
@@ -93,7 +94,8 @@ public class Project {
 					fw.write(line + "\n");
 				}
 				fw.close();
-				//JOptionPane.showMessageDialog(null, "Gespeichert unter " + f.getAbsolutePath());
+				// JOptionPane.showMessageDialog(null, "Gespeichert unter " +
+				// f.getAbsolutePath());
 				return true;
 			} catch (IOException e) {
 				JOptionPane.showMessageDialog(null, e.getMessage());
@@ -104,6 +106,49 @@ public class Project {
 		}
 		return false;
 
+	}
+
+	public Line getClosesVisableLineToPoint(Point2D p) {
+		if(lines.isEmpty())return null;
+		double mindistace = Double.MAX_VALUE;
+		Line closestline = null;
+		int i = 0;
+		for(Line l : lines){
+			Point2D closespoint = getClosestPointOnSegment(l.x1, l.y1, l.x2, l.y2, p.getX(), p.getY());
+			if(closespoint != null) {
+				double distance = Point2D.distanceSq(closespoint.getX(), closespoint.getY(), p.getX(), p.getY());
+				if (distance < mindistace && i < visibleLineCount) {
+					mindistace = distance;
+					closestline = l;
+				}
+			}
+			i++;
+		}
+		if(mindistace <= 1) {
+			return closestline;
+		}
+		return null;
+	}
+
+	private static Point2D getClosestPointOnSegment(double sx1, double sy1, double sx2, double sy2, double px, double py) {
+		double xDelta = sx2 - sx1;
+		double yDelta = sy2 - sy1;
+
+		if ((xDelta == 0) && (yDelta == 0)) {
+			return null;
+		}
+
+		double u = ((px - sx1) * xDelta + (py - sy1) * yDelta) / (xDelta * xDelta + yDelta * yDelta);
+
+		final Point2D closestPoint;
+		if (u < 0) {
+			closestPoint = new Point2D.Double(sx1, sy1);
+		} else if (u > 1) {
+			closestPoint = new Point2D.Double(sx2, sy2);
+		} else {
+			closestPoint = new Point2D.Double(sx1 + u * xDelta, sy1 + u * yDelta);
+		}
+		return closestPoint;
 	}
 
 }

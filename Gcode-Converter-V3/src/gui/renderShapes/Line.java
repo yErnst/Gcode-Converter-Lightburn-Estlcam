@@ -13,8 +13,9 @@ public class Line{
 	public boolean highlited = false;
 	public final boolean GzeroRapid;
 	public final int svalue;
+	public final double feed;
 	
-	public Line(double x1, double y1, double x2, double y2, Double svalue, float stroke , double length, boolean GzeroRapid) {
+	public Line(double x1, double y1, double x2, double y2, Double svalue, float stroke , double length, boolean GzeroRapid, double feed) {
 		this.x1 = x1;
 		this.y1 = y1;
 		this.x2 = x2;
@@ -23,6 +24,7 @@ public class Line{
 		this.GzeroRapid = GzeroRapid;
 		this.stroke = stroke;
 		this.length = length;
+		this.feed = feed;
 	}
 	
 	public void setLineStroke(float stroke) {

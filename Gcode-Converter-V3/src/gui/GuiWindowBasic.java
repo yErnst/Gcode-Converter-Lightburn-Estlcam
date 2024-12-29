@@ -3,6 +3,7 @@ package gui;
 import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.Dimension;
+import java.awt.Point;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DropTarget;
@@ -80,6 +81,7 @@ public class GuiWindowBasic extends JFrame {
 	JMenuItem OpenProjectFolder;
 	JCheckBoxMenuItem useantialiasing;
 	JCheckBoxMenuItem usegrid;
+	JCheckBoxMenuItem uselineinfo;
 	JButton openNCFile;
 	ImageIcon icon;
 
@@ -158,6 +160,10 @@ public class GuiWindowBasic extends JFrame {
 		usegrid = new JCheckBoxMenuItem("Gitter");
 		usegrid.setSelected(true);
 		SettingsMenu.add(usegrid);
+		uselineinfo = new JCheckBoxMenuItem("Linineinfobox");
+		uselineinfo.setSelected(true);
+		SettingsMenu.add(uselineinfo);
+		
 		// Help Menu
 		HelpMenu = new JMenu("Hilfe");
 		menuBar.add(HelpMenu);
@@ -378,6 +384,14 @@ public class GuiWindowBasic extends JFrame {
 				canvas.setShowGrid(usegrid.isSelected());
 			}
 		});
+		
+		uselineinfo.addChangeListener(new ChangeListener() {
+
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				canvas.setUselinieninfo(uselineinfo.isSelected());
+			}
+		});
 
 		this.addWindowListener(new WindowAdapter() {
 			@Override
@@ -410,11 +424,18 @@ public class GuiWindowBasic extends JFrame {
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				canvas.setLastMousePos(e.getPoint());
+				if (e.getButton() == MouseEvent.BUTTON1)
+					canvas.setLastMousePos(e.getPoint());
+				if (e.getButton() == MouseEvent.BUTTON3)
+					canvas.setMessStart(canvas.getMousScreenPos(e.getPoint()));
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
+				if (e.getButton() == MouseEvent.BUTTON3) {
+					canvas.setMessStart(new Point(0, 0));
+					canvas.setMessEnde(new Point(0, 0));
+				}
 			}
 
 			@Override
@@ -438,14 +459,19 @@ public class GuiWindowBasic extends JFrame {
 			@Override
 			public void mouseMoved(MouseEvent e) {
 				Main.windowbasic.updateStatusText();
+				if(uselineinfo.isSelected())canvas.repaint();
 			}
 
 			@Override
 			public void mouseDragged(MouseEvent e) {
-				if (e.getModifiersEx() == MouseEvent.BUTTON1_DOWN_MASK) {
+				if (e.getModifiersEx() == MouseEvent.BUTTON1_DOWN_MASK || e.getModifiersEx() == MouseEvent.BUTTON1_DOWN_MASK + MouseEvent.BUTTON3_DOWN_MASK) {
 					canvas.setoffset(canvas.getLastMousePos().getX() - e.getX(), canvas.getLastMousePos().getY() - e.getY());
 					canvas.setLastMousePos(e.getPoint());
 				}
+				if (e.getModifiersEx() == MouseEvent.BUTTON3_DOWN_MASK || e.getModifiersEx() == MouseEvent.BUTTON1_DOWN_MASK + MouseEvent.BUTTON3_DOWN_MASK) {
+					canvas.setMessEnde(canvas.getMousScreenPos(e.getPoint()));
+				}
+				Main.windowbasic.updateStatusText();
 			}
 		});
 

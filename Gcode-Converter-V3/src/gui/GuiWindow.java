@@ -3,6 +3,7 @@ package gui;
 import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.Dimension;
+import java.awt.Point;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DropTarget;
@@ -58,7 +59,7 @@ import gui.renderShapes.Line;
 import main.Main;
 import project.Project;
 
-public class GuiWindow extends JFrame{
+public class GuiWindow extends JFrame {
 	private static final long serialVersionUID = -5490909351513234262L;
 
 	ProjectExplorer explorer;
@@ -83,6 +84,7 @@ public class GuiWindow extends JFrame{
 	JMenuItem OpenProjectFolder;
 	JCheckBoxMenuItem useantialiasing;
 	JCheckBoxMenuItem usegrid;
+	JCheckBoxMenuItem uselineinfo;
 	JButton openNCFile;
 	ImageIcon icon;
 
@@ -103,9 +105,9 @@ public class GuiWindow extends JFrame{
 	}
 
 	public void initComponents() {
-		
+
 		gcodeViewer = new JList<String>();
-		
+
 		viewSP = new JScrollPane(gcodeViewer);
 		viewSP.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 		viewSP.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
@@ -158,6 +160,7 @@ public class GuiWindow extends JFrame{
 		FileMenu.add(SaveAsGcodeItem);
 		OpenProjectFolder = new JMenuItem("Projektordner öffnen");
 		FileMenu.add(OpenProjectFolder);
+		
 		// Settings Menu
 		SettingsMenu = new JMenu("Einstellungen");
 		menuBar.add(SettingsMenu);
@@ -167,6 +170,10 @@ public class GuiWindow extends JFrame{
 		usegrid = new JCheckBoxMenuItem("Gitter");
 		usegrid.setSelected(true);
 		SettingsMenu.add(usegrid);
+		uselineinfo = new JCheckBoxMenuItem("Linineinfobox");
+		uselineinfo.setSelected(true);
+		SettingsMenu.add(uselineinfo);
+		
 		// Help Menu
 		HelpMenu = new JMenu("Hilfe");
 		menuBar.add(HelpMenu);
@@ -187,15 +194,15 @@ public class GuiWindow extends JFrame{
 		explorer.revalidate();
 		canvas.setSize(this.getWidth() - 616, this.getHeight() - canvas.getY() - InfoBar.getHeight() - 38);
 		GridSpaceing.setBounds(this.getWidth() - 116, this.getHeight() - 68, 100, 30);
-		viewSP.setBounds(this.getWidth()-316, 60, 300, this.getHeight() - canvas.getY() - InfoBar.getHeight() - 38);
+		viewSP.setBounds(this.getWidth() - 316, 60, 300, this.getHeight() - canvas.getY() - InfoBar.getHeight() - 38);
 		viewSP.revalidate();
 	}
 
 	public void updateStatusText() {
 		Point2D pos = canvas.getMousScreenPos(canvas.getMousePosition());
-		InfoBar.setText("Projekt: " + p.getProjectFile().getName() + " konvertiert in " + Main.df.format(p.getConversionTime()) + "s | Vorschubweg ges. "+Main.df.format(p.totalLineLength)+"mm | Vorschubzeit ca. "+Main.df.format(p.estimatedFeedTime)+"min | Linien:" + p.visibleLineCount + "\\" + p.getLinesList().size() + " | Größe:" + Main.df.format(p.maxX - p.minX) + "mm, " + Main.df.format(p.maxY - p.minY) + "mm | Position: X:" + Main.df.format(pos.getX()) + " Y:" + Main.df.format(pos.getY()));
+		InfoBar.setText("Projekt: " + p.getProjectFile().getName() + " konvertiert in " + Main.df.format(p.getConversionTime()) + "s | Vorschubweg ges. " + Main.df.format(p.totalLineLength) + "mm | Vorschubzeit ca. " + Main.df.format(p.estimatedFeedTime) + "min | Linien:" + p.visibleLineCount + "\\" + p.getLinesList().size() + " | Größe:" + Main.df.format(p.maxX - p.minX) + "mm, " + Main.df.format(p.maxY - p.minY) + "mm | Position: X:" + Main.df.format(pos.getX()) + " Y:" + Main.df.format(pos.getY()) + " Mess: " + Main.df.format(canvas.getMessurmentLength()));
 	}
-	
+
 	public void openProject(File f) {
 		p = new Project(f);
 		p.convert();
@@ -203,40 +210,43 @@ public class GuiWindow extends JFrame{
 		canvas.focusObject();
 		ShownLineCount.setMaximum(p.getLinesList().size());
 		ShownLineCount.setValue(p.getLinesList().size());
-		ShownLineCount.setMajorTickSpacing(ShownLineCount.getMaximum()/100);
+		ShownLineCount.setMajorTickSpacing(ShownLineCount.getMaximum() / 100);
 		gcodeViewer.setListData(p.getGcode().toArray(new String[0]));
 		Runtime.getRuntime().gc();
 	}
 
 	public void initListeners() {
-		
+
 		gcodeViewer.addKeyListener(new KeyListener() {
-			
+
 			@Override
 			public void keyTyped(KeyEvent e) {
-				if(e.getKeyChar() == KeyEvent.VK_ESCAPE) gcodeViewer.clearSelection();	
+				if (e.getKeyChar() == KeyEvent.VK_ESCAPE)
+					gcodeViewer.clearSelection();
 			}
-			
+
 			@Override
-			public void keyReleased(KeyEvent e) {}
-			
+			public void keyReleased(KeyEvent e) {
+			}
+
 			@Override
-			public void keyPressed(KeyEvent e) {}
+			public void keyPressed(KeyEvent e) {
+			}
 		});
-		
+
 		gcodeViewer.addListSelectionListener(new ListSelectionListener() {
-			
+
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
 				Set<Integer> highlite = new HashSet<Integer>();
-				for(Integer highliteline : gcodeViewer.getSelectedIndices()) {
-					highlite.add(p.getLastLineFromGcodeLine(highliteline)-1);
+				for (Integer highliteline : gcodeViewer.getSelectedIndices()) {
+					highlite.add(p.getLastLineFromGcodeLine(highliteline) - 1);
 				}
 				int i = 0;
-				for(Line line : p.getLinesList()) {
-					if(highlite.contains(i)) {
+				for (Line line : p.getLinesList()) {
+					if (highlite.contains(i)) {
 						line.highlited = true;
-					}else {
+					} else {
 						line.highlited = false;
 					}
 					i++;
@@ -262,23 +272,23 @@ public class GuiWindow extends JFrame{
 				}
 			}
 		});
-		
+
 		bugHelpMenuItem.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(JOptionPane.showConfirmDialog(null, "Öffnen ein \"Issue\" auf https://github.com/yErnst/Gcode-Converter-Lightburn-Estlcam/issues", "Probleme melden?",JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+				if (JOptionPane.showConfirmDialog(null, "Öffnen ein \"Issue\" auf https://github.com/yErnst/Gcode-Converter-Lightburn-Estlcam/issues", "Probleme melden?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
 					try {
 						Desktop.getDesktop().browse(new URI("https://github.com/yErnst/Gcode-Converter-Lightburn-Estlcam/issues"));
 					} catch (Exception e1) {
 						e1.printStackTrace();
-					} 
+					}
 				}
 			}
 		});
-		
+
 		CMDHelpMenuItem.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(null, Main.cmdhelp);
@@ -388,6 +398,14 @@ public class GuiWindow extends JFrame{
 				canvas.setShowGrid(usegrid.isSelected());
 			}
 		});
+		
+		uselineinfo.addChangeListener(new ChangeListener() {
+
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				canvas.setUselinieninfo(uselineinfo.isSelected());
+			}
+		});
 
 		this.addWindowListener(new WindowAdapter() {
 			@Override
@@ -464,11 +482,19 @@ public class GuiWindow extends JFrame{
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				canvas.setLastMousePos(e.getPoint());
+				if (e.getButton() == MouseEvent.BUTTON1)
+					canvas.setLastMousePos(e.getPoint());
+
+				if (e.getButton() == MouseEvent.BUTTON3)
+					canvas.setMessStart(canvas.getMousScreenPos(e.getPoint()));
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
+				if (e.getButton() == MouseEvent.BUTTON3) {
+					canvas.setMessStart(new Point(0, 0));
+					canvas.setMessEnde(new Point(0, 0));
+				}
 			}
 
 			@Override
@@ -492,14 +518,19 @@ public class GuiWindow extends JFrame{
 			@Override
 			public void mouseMoved(MouseEvent e) {
 				Main.window.updateStatusText();
+				if(uselineinfo.isSelected())canvas.repaint();
 			}
 
 			@Override
 			public void mouseDragged(MouseEvent e) {
-				if (e.getModifiersEx() == MouseEvent.BUTTON1_DOWN_MASK) {
+				if (e.getModifiersEx() == MouseEvent.BUTTON1_DOWN_MASK || e.getModifiersEx() == MouseEvent.BUTTON1_DOWN_MASK + MouseEvent.BUTTON3_DOWN_MASK) {
 					canvas.setoffset(canvas.getLastMousePos().getX() - e.getX(), canvas.getLastMousePos().getY() - e.getY());
 					canvas.setLastMousePos(e.getPoint());
 				}
+				if (e.getModifiersEx() == MouseEvent.BUTTON3_DOWN_MASK || e.getModifiersEx() == MouseEvent.BUTTON1_DOWN_MASK + MouseEvent.BUTTON3_DOWN_MASK) {
+					canvas.setMessEnde(canvas.getMousScreenPos(e.getPoint()));
+				}
+				Main.window.updateStatusText();
 			}
 		});
 

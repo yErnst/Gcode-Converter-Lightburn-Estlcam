@@ -235,9 +235,9 @@ public class Converter {
 		double length = getLength(lastxpos, lastypos, currentxpos, currentypos);
 		totalLineLength += length;
 		if (isG0) {
-			lines.add(new Line(lastxpos, lastypos, currentxpos, currentypos, currentsspeed, 2, length, true));
+			lines.add(new Line(lastxpos, lastypos, currentxpos, currentypos, currentsspeed, 2, length, true, currentfspeed));
 		} else {
-			lines.add(new Line(lastxpos, lastypos, currentxpos, currentypos, currentsspeed, 2, length, false));
+			lines.add(new Line(lastxpos, lastypos, currentxpos, currentypos, currentsspeed, 2, length, false, currentfspeed));
 			if (currentfspeed != 0)
 				estimatedFeedTime += length / currentfspeed;
 		}
